@@ -9,7 +9,7 @@ class Cache:
     """
 
     def __init__(self) -> None:
-        """initializes a cache instance
+        """Initializes a cache instance
         """
         self._redis = redis.Redis()
         self._redis.flushdb(True)
@@ -21,10 +21,10 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-     def get(self , key:str, fn: callable(None)) -> Union[str, bytes, int, float]:
+    def get(self, key: str, fn: callable(None)) -> Union[str, bytes, int, float]:
         """Retrieves a value from a redis data storage"""
         data = self._redis.get(key)
-        return  fn(data) if fn is not None else data
+        return fn(data) if fn is not None else data
 
     def get_str(self, key: str) -> str:
         """Retrieves a string value from a Redis data storage.
